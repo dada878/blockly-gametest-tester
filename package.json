@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "blockly": "^7.20211209.4"
+    "blockly": "^7.20211209.4",
+    "jszip": "^3.7.1"
   }
 }
