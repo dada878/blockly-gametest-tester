@@ -23,7 +23,7 @@ https://developers.google.com/blockly/guides/overview
 [維度Class](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/dimension)\
 [World Class](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/world)\
 [Block Class](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/block)\
-[Entity Class](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/entity)\
+[Entity Class](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/entity)
 
 [自訂義UI](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft-ui/mojang-minecraft-ui)
 
