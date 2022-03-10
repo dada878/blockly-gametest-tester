@@ -7,15 +7,32 @@ function check() {
     alert(generate())
 }
 function saveBlocks() {
-  try {
-    var xml = Blockly.Xml.workspaceToDom(workspace);
-    var xml_text = Blockly.Xml.domToText(xml);
-    
-    localStorage.setItem('workSpace', xml_text);
-  } catch (e) {
-    window.location.href="data:application/octet-stream;utf-8," + encodeURIComponent(xml_text);
-    alert(e);
-  }
+  var xml = Blockly.Xml.workspaceToDom(workspace);
+  var xml_text = Blockly.Xml.domToText(xml);
+  
+  localStorage.setItem('workSpace', xml_text);
+}
+
+function download_project() {
+  let xml = Blockly.Xml.workspaceToDom(workspace);
+  let xml_text = Blockly.Xml.domToText(xml);
+
+  let project_name = prompt("輸入專案名稱");
+  
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(xml_text));
+  element.setAttribute('download', `${project_name}.gbs`);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+function upload_project() {
+  //TODO:完成上傳專案檔功能
 }
 
 function loadBlocks() {
@@ -101,14 +118,14 @@ function download_pack(packName,code) {
     script.file("main.js", code);
 
     zip.generateAsync({type: 'blob'}).then(function(content) {
-    var filename = packName + '.mcpack';
-    var el= document.createElement('a');
-    el.download = filename;
-    el.style.display = 'none';
-    el.href = URL.createObjectURL(content);
-    document.body.appendChild(el);
-    el.click();
-    document.body.removeChild(el);
+      var filename = packName + '.mcpack';
+      var el= document.createElement('a');
+      el.download = filename;
+      el.style.display = 'none';
+      el.href = URL.createObjectURL(content);
+      document.body.appendChild(el);
+      el.click();
+      document.body.removeChild(el);
     });
 }
 
