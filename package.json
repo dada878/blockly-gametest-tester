@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "blockly": "^7.20211209.4"
+  }
+}
