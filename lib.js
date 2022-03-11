@@ -31,7 +31,7 @@ function download_project() {
   document.body.removeChild(element);
 }
 
-function upload_project() { //TODO:將方塊載入
+function upload_project() {
   let element = document.createElement('input');
   element.setAttribute('type', 'file');
   element.setAttribute('data-target', 'file-uploader');
@@ -45,12 +45,9 @@ function upload_project() { //TODO:將方塊載入
 
     const reader = new FileReader();
 
-    // reader.readAsBinaryString
-
     reader.readAsText(blob, "UTF-8")
     reader.onload = function (e) {
       const fileString = e.target.result
-      // console.log(fileString);
 
       var xml = Blockly.Xml.textToDom(fileString);
       workspace.clear();
