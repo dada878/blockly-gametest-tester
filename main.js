@@ -409,6 +409,7 @@ var onresize = function(e) {
   var element = blocklyArea;
   var x = 0;
   var y = 0;
+  //FIXME:下面這段是做啥的
   do {
     x += element.offsetLeft;
     y += element.offsetTop;

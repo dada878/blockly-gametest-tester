@@ -32,7 +32,31 @@ function download_project() {
 }
 
 function upload_project() {
-  //TODO:完成上傳專案檔功能
+  let element = document.createElement('input');
+  element.setAttribute('type', 'file');
+  element.setAttribute('data-target', 'file-uploader');
+  element.setAttribute('accept', '.gbs');
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.addEventListener('change', (e) => {
+    let blob = e.target.files[0];
+
+    const reader = new FileReader();
+
+    // reader.readAsBinaryString
+
+    reader.readAsText(blob, "UTF-8")  
+    reader.onload = function (e) {  
+      const fileString = e.target.result 
+      console.log(fileString);
+    }
+
+    document.body.removeChild(element);
+  });
+
+  element.click();
 }
 
 function loadBlocks() {
