@@ -113,7 +113,7 @@
 	"LOGIC_COMPARE_TOOLTIP_GT": "如果第一個輸入結果大於第二個，返回 true。",
 	"LOGIC_COMPARE_TOOLTIP_GTE": "如果第一個輸入結果大於或等於第二個，返回 true。",
 	"LOGIC_OPERATION_TOOLTIP_AND": "如果兩個輸入結果都為 true，則返回 true。",
-	"LOGIC_OPERATION_AND": "和",
+	"LOGIC_OPERATION_AND": "且",
 	"LOGIC_OPERATION_TOOLTIP_OR": "如果至少一個輸入結果為 true，返回 true。",
 	"LOGIC_OPERATION_OR": "或",
 	"LOGIC_NEGATE_TITLE": "%1 不成立",
