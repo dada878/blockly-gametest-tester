@@ -13,6 +13,53 @@ var workspace = Blockly.inject(
 
 
 function blocks_init(Blockly) {   
+
+  Blockly.Blocks['is_str_in_str'] = {
+    init: function() {
+      this.appendValueInput("STRING")
+          .setCheck("String")
+          .appendField("字串");
+      this.appendValueInput("TARGET")
+          .setCheck("String")
+          .appendField("內是否包含");
+      this.setInputsInline(true);
+      this.setOutput(true, "Boolean");
+      this.setColour(160);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
+  Blockly.JavaScript['is_str_in_str'] = function(block) {
+    var value_string = Blockly.JavaScript.valueToCode(block, 'STRING', Blockly.JavaScript.ORDER_ATOMIC);
+    var value_target = Blockly.JavaScript.valueToCode(block, 'TARGET', Blockly.JavaScript.ORDER_ATOMIC);
+
+    var code = `${value_string}.indexOf(${value_target}) > -1`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+  };
+
+  Blockly.Blocks['lib_while'] = {
+    init: function() {
+      this.appendValueInput("IF")
+          .setCheck("Boolean")
+          .appendField("重複直到");
+      this.appendStatementInput("CODE")
+          .setCheck(null);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(120);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
+  Blockly.JavaScript['lib_while'] = function(block) {
+    var value_if = Blockly.JavaScript.valueToCode(block, 'IF', Blockly.JavaScript.ORDER_ATOMIC);
+    var statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
+    var code = `while(!${value_if}){${statements_code}}\n`;
+    return code;
+  };
+
   Blockly.Blocks['gametest_getitemid'] = {
     init: function() {
       this.appendValueInput("ITEM")
