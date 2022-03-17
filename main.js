@@ -56,7 +56,7 @@ function blocks_init(Blockly) {
   Blockly.JavaScript['lib_while'] = function(block) {
     var value_if = Blockly.JavaScript.valueToCode(block, 'IF', Blockly.JavaScript.ORDER_ATOMIC);
     var statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
-    var code = `while(!${value_if}){${statements_code}}\n`;
+    var code = `while(!${value_if}) {\n${statements_code}\n}\n`;
     return code;
   };
 
@@ -228,18 +228,18 @@ this.setHelpUrl("");
 
   Blockly.JavaScript['gametest_getplayersneak'] = function(block) {
     let value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
+    
     let code = `${value_player}.isSneaking`;
-    // TODO: Change ORDER_NONE to the correct strength.
+    
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
   
   Blockly.JavaScript['gametest_getplayerpos'] = function(block) {
     let dropdown_pos = block.getFieldValue('POS');
     let value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
+    
     let code = `${value_player}.${dropdown_pos}`;
-    // TODO: Change ORDER_NONE to the correct strength.
+    
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
 
@@ -310,7 +310,7 @@ Minecraft.world.events.beforeChat.subscribe(e => {
   Blockly.JavaScript['gametest_run_command'] = function(block) {
       let dropdown_dimension = block.getFieldValue('DIMENSION');
       let value_command = Blockly.JavaScript.valueToCode(block, 'COMMAND', Blockly.JavaScript.ORDER_ATOMIC);
-      // TODO: Assemble JavaScript into code variable.
+      
       let code = `Minecraft.world.getDimension("${dropdown_dimension}").runCommand(${value_command});\n`;
       return code;
   };
@@ -351,7 +351,7 @@ Blockly.JavaScript['gametest_tellraw_command'] = function(block) {
   Blockly.JavaScript['gametest_gui_actionform'] = function(block) {
     var variable_player = Blockly.JavaScript.nameDB_.getName(block.getFieldValue('PLAYER'), Blockly.Variables.NAME_TYPE);
     var value_select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
+    
     var code = '...;\n';
     return code;
   };
