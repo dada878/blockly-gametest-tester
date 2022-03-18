@@ -19,8 +19,9 @@
     color: white;
 }
 /* Stacks the icon on top of the label. */
-.blocklyTreeRowContentContainer {
+/* add a element in category */
+/* .blocklyTreeRowContentContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */

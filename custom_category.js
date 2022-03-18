@@ -34,15 +34,17 @@ class CustomCategory extends Blockly.ToolboxCategory {
             Blockly.utils.aria.State.SELECTED, isSelected);
     }
 
-    /** @override */
-    createIconDom_() {
-        const img = document.createElement('img');
-        img.src = './icon.png';
-        img.alt = 'Lamp';
-        img.width='15';
-        img.height='15';
-        return img;
-    }
+    // add the element in category
+    
+    // /** @override */
+    // createIconDom_() {
+    //     const img = document.createElement('img');
+    //     img.src = './icon.png';
+    //     img.alt = 'Lamp';
+    //     img.width='15';
+    //     img.height='15';
+    //     return img;
+    // }
   }
 
 Blockly.registry.register(
