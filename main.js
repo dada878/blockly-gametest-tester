@@ -6,8 +6,9 @@ var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
 var workspace = Blockly.inject(
   blocklyDiv,{
-    toolbox: document.getElementById('toolbox')
-  }
+    toolbox: document.getElementById('toolbox'),
+    renderer: 'custom_renderer'
+  },
 );
 
 
