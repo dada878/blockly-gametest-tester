@@ -15,6 +15,7 @@ var workspace = Blockly.inject(
 
 function blocks_init(Blockly) {   
 
+  //完成lib_index_string
   Blockly.Blocks['lib_index_string'] = {
     init: function() {
       this.appendValueInput("NAME")
