@@ -18,17 +18,17 @@ function blocks_init(Blockly) {
   //完成lib_index_string
   Blockly.Blocks['lib_index_string'] = {
     init: function() {
-      this.appendValueInput("NAME")
+      this.appendValueInput("STRING")
           .setCheck("String")
-          .appendField(new Blockly.FieldLabelSerializable("取得字串"), "STRING");
-      this.appendValueInput("NAME")
+          .appendField("取得字串");
+      this.appendValueInput("INDEX")
           .setCheck("Number")
-          .appendField(new Blockly.FieldLabelSerializable("的第"), "INDEX");
+          .appendField("的第");
       this.appendDummyInput()
           .appendField("個文字");
       this.setInputsInline(true);
       this.setOutput(true, "String");
-      this.setColour(230);
+      this.setColour(160);
    this.setTooltip("");
    this.setHelpUrl("");
     }
@@ -38,7 +38,7 @@ function blocks_init(Blockly) {
   Blockly.JavaScript['lib_index_string'] = function(block) {
     var value_string = Blockly.JavaScript.valueToCode(block, 'STRING', Blockly.JavaScript.ORDER_ATOMIC);
     var value_index = Blockly.JavaScript.valueToCode(block, 'INDEX', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = `${value_string}[${value_index}+1]`;
+    var code = `${value_string}[${value_index}-1]`;
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
 
