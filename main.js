@@ -15,6 +15,29 @@ var workspace = Blockly.inject(
 
 function blocks_init(Blockly) {   
 
+
+  Blockly.Blocks['gametest_on_tick'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("當遊戲刻運行");
+      this.appendStatementInput("CODE")
+          .setCheck(null);
+      this.setColour(20);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
+  Blockly.JavaScript['gametest_on_tick'] = function(block) {
+    var statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
+    var code = `
+    Minecraft.world.events.beforeItemUse.subscribe(e => {
+    ${statements_code}
+    });
+      `;
+    return code;
+  };
+
   Blockly.Blocks['get_substring'] = {
     init: function() {
       this.appendValueInput("STRING")
@@ -40,9 +63,7 @@ function blocks_init(Blockly) {
     var string = Blockly.JavaScript.valueToCode(block, 'STRING', Blockly.JavaScript.ORDER_ATOMIC);
     var start = Blockly.JavaScript.valueToCode(block, 'START', Blockly.JavaScript.ORDER_ATOMIC);
     var end = Blockly.JavaScript.valueToCode(block, 'END', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
     var code = `${string}.substr(${start},${end})`;
-    // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
 
