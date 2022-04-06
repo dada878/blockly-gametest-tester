@@ -15,6 +15,37 @@ var workspace = Blockly.inject(
 
 function blocks_init(Blockly) {   
 
+  Blockly.Blocks['get_substring'] = {
+    init: function() {
+      this.appendValueInput("STRING")
+          .setCheck("String")
+          .appendField("取得字串");
+      this.appendValueInput("START")
+          .setCheck("Number")
+          .appendField("的第");
+      this.appendValueInput("END")
+          .setCheck("Number")
+          .appendField("到");
+      this.appendDummyInput()
+          .appendField("個字");
+      this.setInputsInline(true);
+      this.setOutput(true, "String");
+      this.setColour(160);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
+  Blockly.JavaScript['get_substring'] = function(block) {
+    var string = Blockly.JavaScript.valueToCode(block, 'STRING', Blockly.JavaScript.ORDER_ATOMIC);
+    var start = Blockly.JavaScript.valueToCode(block, 'START', Blockly.JavaScript.ORDER_ATOMIC);
+    var end = Blockly.JavaScript.valueToCode(block, 'END', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = `${string}.substr(${start},${end})`;
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code, Blockly.JavaScript.ORDER_NONE];
+  };
+
   //完成lib_index_string
   Blockly.Blocks['lib_index_string'] = {
     init: function() {
