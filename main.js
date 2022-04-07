@@ -11,9 +11,60 @@ var workspace = Blockly.inject(
   },
 );
 
+function blocks_init(Blockly) {
 
+  Blockly.Blocks['gametest_get_entity_id'] = {
+    init: function() {
+      this.appendValueInput("ENTITY")
+          .setCheck(null)
+          .appendField("取得實體id");
+      this.setOutput(true, "String");
+      this.setColour(80);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+  
+  Blockly.JavaScript['gametest_get_entity_id'] = function(block) {
+    const value_entity = Blockly.JavaScript.valueToCode(block, 'ENTITY', Blockly.JavaScript.ORDER_ATOMIC);
+    const code = `${value_entity}.id`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+  };
+  
+  Blockly.Blocks['gametest_on_hit_entity'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("當實體攻擊");
+      this.appendValueInput("ATTACKER")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("攻擊實體");
+      this.appendValueInput("TARGET")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("受擊實體");
+      this.appendStatementInput("CODE")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT);
+      this.setColour(20);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
 
-function blocks_init(Blockly) {   
+  Blockly.JavaScript['gametest_on_hit_entity'] = function(block) {
+    const value_attacker = Blockly.JavaScript.valueToCode(block, 'ATTACKER', Blockly.JavaScript.ORDER_ATOMIC);
+    const value_target = Blockly.JavaScript.valueToCode(block, 'TARGET', Blockly.JavaScript.ORDER_ATOMIC);
+    const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
+    const code = `
+    Minecraft.world.events.entityHit.subscribe(e => {
+      ${value_attacker} = e.entity;
+      ${value_target} = e.hitEntity;
+      ${statements_code}
+    });
+          `;
+    return code;
+  };
 
 
   Blockly.Blocks['gametest_on_tick'] = {

@@ -282,6 +282,18 @@
                       </block>
                   </value>
               </block>
+              <block type="gametest_on_hit_entity">
+                <value name="ATTACKER">
+                    <block type="variables_get">
+                      <field name="VAR">攻擊的實體</field>
+                    </block>
+                </value>
+                <value name="TARGET">
+                    <block type="variables_get">
+                      <field name="VAR">受擊的實體</field>
+                    </block>
+                </value>
+            </block>
               <block type="gametest_on_tick"></block>
               <block type="gametest_onitemuse">
                 <value name="PLAYER">
@@ -365,6 +377,14 @@
                 </block>
             </value>
         </block>
+        <label text="實體類別"></label>
+        <block type="gametest_get_entity_id">
+          <value name="ENTITY">
+              <block type="variables_get">
+                <field name="VAR">實體</field>
+              </block>
+          </value>
+      </block>
         </category>
         <category name="自訂UI" colour="180">
           <block type="gametest_gui_actionform" disabled="true">
