@@ -315,20 +315,13 @@
           </category>
           <category name="遊戲參數" colour="80">
             <label text="玩家類別"></label>
-            <block type="gametest_getplayerpos">
-                <value name="PLAYER">
-                    <block type="variables_get">
-                      <field name="VAR">玩家</field>
-                    </block>
-                </value>
-            </block>
-            <block type="gametest_getplayername">
-                <value name="PLAYER">
-                    <block type="variables_get">
-                      <field name="VAR">玩家</field>
-                    </block>
-                </value>
-            </block>
+            <block type="gametest_get_player_real_name">
+              <value name="PLAYER">
+                  <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                  </block>
+              </value>
+          </block>
             <block type="gametest_getplayersneak">
               <value name="PLAYER">
                   <block type="variables_get">
@@ -336,18 +329,6 @@
                   </block>
               </value>
           </block>
-          <block type="gametest_has_tag">
-            <value name="PLAYER">
-                <block type="variables_get">
-                  <field name="VAR">玩家</field>
-                </block>
-            </value>
-            <value name="TAG">
-              <block type="text">
-                <field name="TEXT">Tag</field>
-              </block>
-          </value>
-        </block>
             <label text="物品類別"></label>
             <block type="gametest_getitemid">
               <value name="ITEM">
@@ -385,6 +366,32 @@
               </block>
           </value>
       </block>
+      <block type="gametest_get_entity_pos">
+        <value name="ENTITY">
+            <block type="variables_get">
+              <field name="VAR">實體</field>
+            </block>
+        </value>
+    </block>
+    <block type="gametest_getplayername">
+      <value name="PLAYER">
+          <block type="variables_get">
+            <field name="VAR">實體</field>
+          </block>
+      </value>
+  </block>
+  <block type="gametest_has_tag">
+    <value name="PLAYER">
+        <block type="variables_get">
+          <field name="VAR">實體</field>
+        </block>
+    </value>
+    <value name="TAG">
+      <block type="text">
+        <field name="TEXT">Tag</field>
+      </block>
+  </value>
+</block>
         </category>
         <category name="自訂UI" colour="180">
           <block type="gametest_gui_actionform" disabled="true">
