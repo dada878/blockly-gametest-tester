@@ -31,7 +31,7 @@ function blocks_init(Blockly) {
   Blockly.JavaScript['gametest_on_tick'] = function(block) {
     var statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     var code = `
-    Minecraft.world.events.beforeItemUse.subscribe(e => {
+    Minecraft.world.events.tick.subscribe(e => {
     ${statements_code}
     });
       `;
