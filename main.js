@@ -5,54 +5,54 @@ window.onload = () => importBlocks();
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
 var workspace = Blockly.inject(
-  blocklyDiv,{
-    toolbox: document.getElementById('toolbox'),
-    // renderer: 'custom_renderer'
-  },
+  blocklyDiv, {
+  toolbox: document.getElementById('toolbox'),
+  // renderer: 'custom_renderer'
+},
 );
 
 function blocks_init(Blockly) {
 
   Blockly.Blocks['gametest_get_entity_id'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("ENTITY")
-          .setCheck(null)
-          .appendField("取得ID");
+        .setCheck(null)
+        .appendField("取得ID");
       this.setOutput(true, "String");
       this.setColour(80);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
-  
-  Blockly.JavaScript['gametest_get_entity_id'] = function(block) {
+
+  Blockly.JavaScript['gametest_get_entity_id'] = function (block) {
     const value_entity = Blockly.JavaScript.valueToCode(block, 'ENTITY', Blockly.JavaScript.ORDER_ATOMIC);
     const code = `${value_entity}.id`;
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
-  
+
   Blockly.Blocks['gametest_on_hit_entity'] = {
-    init: function() {
+    init: function () {
       this.appendDummyInput()
-          .appendField("當實體攻擊");
+        .appendField("當實體攻擊");
       this.appendValueInput("ATTACKER")
-          .setCheck(null)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("攻擊實體");
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("攻擊實體");
       this.appendValueInput("TARGET")
-          .setCheck(null)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("受擊實體");
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("受擊實體");
       this.appendStatementInput("CODE")
-          .setCheck(null)
-          .setAlign(Blockly.ALIGN_RIGHT);
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT);
       this.setColour(20);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
-  Blockly.JavaScript['gametest_on_hit_entity'] = function(block) {
+  Blockly.JavaScript['gametest_on_hit_entity'] = function (block) {
     const value_attacker = Blockly.JavaScript.valueToCode(block, 'ATTACKER', Blockly.JavaScript.ORDER_ATOMIC);
     const value_target = Blockly.JavaScript.valueToCode(block, 'TARGET', Blockly.JavaScript.ORDER_ATOMIC);
     const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
@@ -67,27 +67,27 @@ function blocks_init(Blockly) {
   };
 
   Blockly.Blocks['gametest_on_block_place'] = {
-    init: function() {
+    init: function () {
       this.appendDummyInput()
-          .appendField("當方塊被玩家放置");
+        .appendField("當方塊被玩家放置");
       this.appendValueInput("PLAYER")
-          .setCheck(null)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("玩家");
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("玩家");
       this.appendValueInput("BLOCK")
-          .setCheck(null)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("方塊");
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("方塊");
       this.appendStatementInput("CODE")
-          .setCheck(null)
-          .setAlign(Blockly.ALIGN_RIGHT);
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT);
       this.setColour(20);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
-  Blockly.JavaScript['gametest_on_block_place'] = function(block) {
+  Blockly.JavaScript['gametest_on_block_place'] = function (block) {
     const value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     const value_block = Blockly.JavaScript.valueToCode(block, 'BLOCK', Blockly.JavaScript.ORDER_ATOMIC);
     const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
@@ -103,18 +103,18 @@ function blocks_init(Blockly) {
 
 
   Blockly.Blocks['gametest_on_tick'] = {
-    init: function() {
+    init: function () {
       this.appendDummyInput()
-          .appendField("當遊戲刻運行");
+        .appendField("當遊戲刻運行");
       this.appendStatementInput("CODE")
-          .setCheck(null);
+        .setCheck(null);
       this.setColour(20);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
-  Blockly.JavaScript['gametest_on_tick'] = function(block) {
+  Blockly.JavaScript['gametest_on_tick'] = function (block) {
     var statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     var code = `
     Minecraft.world.events.tick.subscribe(e => {
@@ -125,27 +125,27 @@ function blocks_init(Blockly) {
   };
 
   Blockly.Blocks['get_substring'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("STRING")
-          .setCheck("String")
-          .appendField("取得字串");
+        .setCheck("String")
+        .appendField("取得字串");
       this.appendValueInput("START")
-          .setCheck("Number")
-          .appendField("的第");
+        .setCheck("Number")
+        .appendField("的第");
       this.appendValueInput("END")
-          .setCheck("Number")
-          .appendField("到");
+        .setCheck("Number")
+        .appendField("到");
       this.appendDummyInput()
-          .appendField("個字");
+        .appendField("個字");
       this.setInputsInline(true);
       this.setOutput(true, "String");
       this.setColour(160);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
-  Blockly.JavaScript['get_substring'] = function(block) {
+  Blockly.JavaScript['get_substring'] = function (block) {
     var string = Blockly.JavaScript.valueToCode(block, 'STRING', Blockly.JavaScript.ORDER_ATOMIC);
     var start = Blockly.JavaScript.valueToCode(block, 'START', Blockly.JavaScript.ORDER_ATOMIC);
     var end = Blockly.JavaScript.valueToCode(block, 'END', Blockly.JavaScript.ORDER_ATOMIC);
@@ -155,25 +155,25 @@ function blocks_init(Blockly) {
 
   //完成lib_index_string
   Blockly.Blocks['lib_index_string'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("STRING")
-          .setCheck("String")
-          .appendField("取得字串");
+        .setCheck("String")
+        .appendField("取得字串");
       this.appendValueInput("INDEX")
-          .setCheck("Number")
-          .appendField("的第");
+        .setCheck("Number")
+        .appendField("的第");
       this.appendDummyInput()
-          .appendField("個文字");
+        .appendField("個文字");
       this.setInputsInline(true);
       this.setOutput(true, "String");
       this.setColour(160);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
 
-  Blockly.JavaScript['lib_index_string'] = function(block) {
+  Blockly.JavaScript['lib_index_string'] = function (block) {
     var value_string = Blockly.JavaScript.valueToCode(block, 'STRING', Blockly.JavaScript.ORDER_ATOMIC);
     var value_index = Blockly.JavaScript.valueToCode(block, 'INDEX', Blockly.JavaScript.ORDER_ATOMIC);
     var code = `${value_string}[${value_index}-1]`;
@@ -181,22 +181,22 @@ function blocks_init(Blockly) {
   };
 
   Blockly.Blocks['is_str_in_str'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("STRING")
-          .setCheck("String")
-          .appendField("字串");
+        .setCheck("String")
+        .appendField("字串");
       this.appendValueInput("TARGET")
-          .setCheck("String")
-          .appendField("內是否包含");
+        .setCheck("String")
+        .appendField("內是否包含");
       this.setInputsInline(true);
       this.setOutput(true, "Boolean");
       this.setColour(160);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
-  Blockly.JavaScript['is_str_in_str'] = function(block) {
+  Blockly.JavaScript['is_str_in_str'] = function (block) {
     var value_string = Blockly.JavaScript.valueToCode(block, 'STRING', Blockly.JavaScript.ORDER_ATOMIC);
     var value_target = Blockly.JavaScript.valueToCode(block, 'TARGET', Blockly.JavaScript.ORDER_ATOMIC);
 
@@ -205,21 +205,21 @@ function blocks_init(Blockly) {
   };
 
   Blockly.Blocks['lib_while'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("IF")
-          .setCheck("Boolean")
-          .appendField("重複直到");
+        .setCheck("Boolean")
+        .appendField("重複直到");
       this.appendStatementInput("CODE")
-          .setCheck(null);
+        .setCheck(null);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour(120);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
-  Blockly.JavaScript['lib_while'] = function(block) {
+  Blockly.JavaScript['lib_while'] = function (block) {
     var value_if = Blockly.JavaScript.valueToCode(block, 'IF', Blockly.JavaScript.ORDER_ATOMIC);
     var statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     var code = `while(!${value_if}) {\n${statements_code}\n}\n`;
@@ -227,116 +227,116 @@ function blocks_init(Blockly) {
   };
 
   Blockly.Blocks['gametest_getitemid'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("ITEM")
-          .setCheck("Item")
-          .appendField("取得物品ID");
+        .setCheck("Item")
+        .appendField("取得物品ID");
       this.setOutput(true, "String");
       this.setColour(80);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
-  
-  Blockly.JavaScript['gametest_getitemid'] = function(block) {
+
+  Blockly.JavaScript['gametest_getitemid'] = function (block) {
     var value_item = Blockly.JavaScript.valueToCode(block, 'ITEM', Blockly.JavaScript.ORDER_ATOMIC);
     let code = `${value_item}.id`;
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
-  
+
   Blockly.Blocks['gametest_getitemname'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("ITEM")
-          .setCheck("Item")
-          .appendField("取得物品名稱");
+        .setCheck("Item")
+        .appendField("取得物品名稱");
       this.setOutput(true, "String");
       this.setColour(80);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
-  
-  Blockly.JavaScript['gametest_getitemname'] = function(block) {
+
+  Blockly.JavaScript['gametest_getitemname'] = function (block) {
     var value_item = Blockly.JavaScript.valueToCode(block, 'ITEM', Blockly.JavaScript.ORDER_ATOMIC);
     let code = `${value_item}.nameTag`;
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
 
   Blockly.Blocks['gametest_getitemamount'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("ITEM")
-          .setCheck("Item")
-          .appendField("取得物品堆疊數量");
+        .setCheck("Item")
+        .appendField("取得物品堆疊數量");
       this.setOutput(true, "String");
       this.setColour(80);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
-  Blockly.JavaScript['gametest_getitemamount'] = function(block) {
+  Blockly.JavaScript['gametest_getitemamount'] = function (block) {
     var value_item = Blockly.JavaScript.valueToCode(block, 'ITEM', Blockly.JavaScript.ORDER_ATOMIC);
     let code = `${value_item}.amount`;
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
 
   Blockly.Blocks['gametest_getitemdata'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("ITEM")
-          .setCheck("Item")
-          .appendField("取得物品數據值");
+        .setCheck("Item")
+        .appendField("取得物品數據值");
       this.setOutput(true, "String");
       this.setColour(80);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
-  Blockly.JavaScript['gametest_getitemdata'] = function(block) {
+  Blockly.JavaScript['gametest_getitemdata'] = function (block) {
     var value_item = Blockly.JavaScript.valueToCode(block, 'ITEM', Blockly.JavaScript.ORDER_ATOMIC);
     let code = `${value_item}.data`;
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
-  
+
   Blockly.Blocks['gametest_onitemuse'] = {
-    init: function() {
+    init: function () {
       this.appendDummyInput()
-          .appendField("當玩家使用物品");
+        .appendField("當玩家使用物品");
       this.appendValueInput("ITEM")
-          .setCheck("Item")
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("物品");
+        .setCheck("Item")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("物品");
       this.appendValueInput("PLAYER")
-          .setCheck("Player")
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("玩家");
+        .setCheck("Player")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("玩家");
       this.appendValueInput("CANCEL")
-          .setCheck("Boolean")
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("是否攔截");
+        .setCheck("Boolean")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("是否攔截");
       this.appendStatementInput("DO")
-          .setCheck(null);
+        .setCheck(null);
       this.setColour(20);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
-  
-  Blockly.JavaScript['gametest_onitemuse'] = function(block) {
+
+  Blockly.JavaScript['gametest_onitemuse'] = function (block) {
     let value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     let value_item = Blockly.JavaScript.valueToCode(block, 'ITEM', Blockly.JavaScript.ORDER_ATOMIC);
     let value_cancel = Blockly.JavaScript.valueToCode(block, 'CANCEL', Blockly.JavaScript.ORDER_ATOMIC);
     let statements_do = Blockly.JavaScript.statementToCode(block, 'DO');
-    
+
     let cancel
-  
+
     if (value_cancel) {
-        cancel = "e.cancel = true"
+      cancel = "e.cancel = true"
     }
     else {
       cancel = "e.cancel = false"
     }
-  
+
     let code = `
   Minecraft.world.events.beforeItemUse.subscribe(e => {
   ${cancel}
@@ -346,130 +346,148 @@ function blocks_init(Blockly) {
   });
     `;
     return code;
-    };
-
-  Blockly.Blocks['gametest_getplayername'] = {
-      init: function() {
-      this.appendValueInput("PLAYER")
-          .setCheck("Player")
-          .appendField("取得實體名稱");
-      this.setOutput(true, "String");
-      this.setColour(80);
-  this.setTooltip("");
-  this.setHelpUrl("");
-      }
   };
 
-  Blockly.JavaScript['gametest_getplayername'] = function(block) {
+  Blockly.Blocks['gametest_getplayername'] = {
+    init: function () {
+      this.appendValueInput("PLAYER")
+        .setCheck("Player")
+        .appendField("取得實體名稱");
+      this.setOutput(true, "String");
+      this.setColour(80);
+      this.setTooltip("");
+      this.setHelpUrl("");
+    }
+  };
+
+  Blockly.JavaScript['gametest_getplayername'] = function (block) {
     let value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     let code = `${value_player}.nameTag`;
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
 
   Blockly.Blocks['gametest_get_player_real_name'] = {
-    init: function() {
-    this.appendValueInput("PLAYER")
+    init: function () {
+      this.appendValueInput("PLAYER")
         .setCheck("Player")
         .appendField("取得玩家真實名稱");
-    this.setOutput(true, "String");
-    this.setColour(80);
-this.setTooltip("");
-this.setHelpUrl("");
-    }
-};
-
-Blockly.JavaScript['gametest_get_player_real_name'] = function(block) {
-  let value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
-  let code = `${value_player}.name`;
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-  
-  Blockly.Blocks['gametest_get_entity_pos'] = {
-    init: function() {
-      this.appendDummyInput()
-          .appendField(new Blockly.FieldDropdown([["X座標","location.x"], ["Y座標","location.y"], ["Z座標","location.z"]]), "POS");
-      this.appendValueInput("ENTITY")
-          .setCheck("Player")
-          .appendField("取得座標");
-      this.setOutput(true, "Number");
+      this.setOutput(true, "String");
       this.setColour(80);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
-  Blockly.JavaScript['gametest_get_entity_pos'] = function(block) {
+  Blockly.JavaScript['gametest_get_player_real_name'] = function (block) {
+    let value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
+    let code = `${value_player}.name`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+  };
+
+  Blockly.Blocks['gametest_check_block_is_air'] = {
+    init: function () {
+      this.appendValueInput("BLOCK")
+        .setCheck(null)
+        .appendField("方塊是否為空氣");
+      this.setOutput(true, "Boolean");
+      this.setColour(80);
+      this.setTooltip("");
+      this.setHelpUrl("");
+    }
+  };
+
+  Blockly.JavaScript['gametest_check_block_is_air'] = function (block) {
+    let value_player = Blockly.JavaScript.valueToCode(block, 'BLOCK', Blockly.JavaScript.ORDER_ATOMIC);
+    let code = `${value_player}.isEmpty`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+  };
+
+
+  Blockly.Blocks['gametest_get_entity_pos'] = {
+    init: function () {
+      this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["X座標", "location.x"], ["Y座標", "location.y"], ["Z座標", "location.z"]]), "POS");
+      this.appendValueInput("ENTITY")
+        .setCheck("Player")
+        .appendField("取得座標");
+      this.setOutput(true, "Number");
+      this.setColour(80);
+      this.setTooltip("");
+      this.setHelpUrl("");
+    }
+  };
+
+  Blockly.JavaScript['gametest_get_entity_pos'] = function (block) {
     let dropdown_pos = block.getFieldValue('POS');
     let value_player = Blockly.JavaScript.valueToCode(block, 'ENTITY', Blockly.JavaScript.ORDER_ATOMIC);
-    
+
     let code = `${value_player}.${dropdown_pos}`;
-    
+
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
 
   Blockly.Blocks['gametest_getplayersneak'] = {
-    init: function() {
-    this.appendValueInput("PLAYER")
+    init: function () {
+      this.appendValueInput("PLAYER")
         .setCheck("Player")
         .appendField("取得蹲下狀態");
-    this.setOutput(true, "Boolean");
-    this.setColour(80);
-this.setTooltip("");
-this.setHelpUrl("");
+      this.setOutput(true, "Boolean");
+      this.setColour(80);
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
-};
+  };
 
-  Blockly.JavaScript['gametest_getplayersneak'] = function(block) {
+  Blockly.JavaScript['gametest_getplayersneak'] = function (block) {
     let value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
-    
+
     let code = `${value_player}.isSneaking`;
-    
+
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
-  
+
 
 
   Blockly.Blocks['gametest_onchat'] = {
-    init: function() {
+    init: function () {
       this.appendDummyInput()
-          .appendField("當玩家傳送訊息");
+        .appendField("當玩家傳送訊息");
       this.appendValueInput("PLAYER")
-          .setCheck(null)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("玩家");
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("玩家");
       this.appendValueInput("MESSAGE")
-          .setCheck(null)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("訊息");
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("訊息");
       this.appendValueInput("CANCEL")
-          .setCheck("Boolean")
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("是否攔截");
+        .setCheck("Boolean")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("是否攔截");
       this.appendStatementInput("DO")
-          .setCheck(null);
+        .setCheck(null);
       this.setColour(20);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
-  
-  Blockly.JavaScript['gametest_onchat'] = function(block) {
+
+  Blockly.JavaScript['gametest_onchat'] = function (block) {
     let value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     let value_message = Blockly.JavaScript.valueToCode(block, 'MESSAGE', Blockly.JavaScript.ORDER_ATOMIC);
     let value_cancel = Blockly.JavaScript.valueToCode(block, 'CANCEL', Blockly.JavaScript.ORDER_ATOMIC);
     let statements_do = Blockly.JavaScript.statementToCode(block, 'DO');
-      
+
     let cancel
 
-      if (value_cancel) {
-          cancel = "e.cancel = true"
-      }
-      else {
-        cancel = "e.cancel = false"
-      }
-  
-      let code = `
+    if (value_cancel) {
+      cancel = "e.cancel = true"
+    }
+    else {
+      cancel = "e.cancel = false"
+    }
+
+    let code = `
 Minecraft.world.events.beforeChat.subscribe(e => {
   ${cancel}
   ${value_player} = e.sender;
@@ -477,109 +495,109 @@ Minecraft.world.events.beforeChat.subscribe(e => {
   ${statements_do}
 });
       `;
-      return code;
-      };
-  
+    return code;
+  };
+
   //執行指令
   Blockly.Blocks['gametest_run_command'] = {
-      init: function() {
-          this.appendValueInput("COMMAND")
-              .setCheck("String")
-              .appendField("執行指令在")
-              .appendField(new Blockly.FieldDropdown([["主世界","overworld"], ["地獄","nether"], ["終界","the end"]]), "DIMENSION");
-          this.setPreviousStatement(true, null);
-          this.setNextStatement(true, null);
-          this.setColour(50);
+    init: function () {
+      this.appendValueInput("COMMAND")
+        .setCheck("String")
+        .appendField("執行指令在")
+        .appendField(new Blockly.FieldDropdown([["主世界", "overworld"], ["地獄", "nether"], ["終界", "the end"]]), "DIMENSION");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(50);
       this.setTooltip("");
       this.setHelpUrl("");
-  }
+    }
   };
-  Blockly.JavaScript['gametest_run_command'] = function(block) {
-      let dropdown_dimension = block.getFieldValue('DIMENSION');
-      let value_command = Blockly.JavaScript.valueToCode(block, 'COMMAND', Blockly.JavaScript.ORDER_ATOMIC);
-      
-      let code = `Minecraft.world.getDimension("${dropdown_dimension}").runCommand(${value_command});\n`;
-      return code;
+  Blockly.JavaScript['gametest_run_command'] = function (block) {
+    let dropdown_dimension = block.getFieldValue('DIMENSION');
+    let value_command = Blockly.JavaScript.valueToCode(block, 'COMMAND', Blockly.JavaScript.ORDER_ATOMIC);
+
+    let code = `Minecraft.world.getDimension("${dropdown_dimension}").runCommand(${value_command});\n`;
+    return code;
   };
   Blockly.Blocks['gametest_tellraw_command'] = {
-    init: function() {
-        this.appendValueInput("MESSAGE")
-            .setCheck("String")
-            .appendField("發送tellraw訊息")
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(50);
-    this.setTooltip("");
-    this.setHelpUrl("");
-}
-};
-Blockly.JavaScript['gametest_tellraw_command'] = function(block) {
+    init: function () {
+      this.appendValueInput("MESSAGE")
+        .setCheck("String")
+        .appendField("發送tellraw訊息")
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(50);
+      this.setTooltip("");
+      this.setHelpUrl("");
+    }
+  };
+  Blockly.JavaScript['gametest_tellraw_command'] = function (block) {
     let value_message = Blockly.JavaScript.valueToCode(block, 'MESSAGE', Blockly.JavaScript.ORDER_ATOMIC);
-    let okay_message = `${value_message}`.replaceAll('\"',"''").replaceAll('\\\\',"\\")
+    let okay_message = `${value_message}`.replaceAll('\"', "''").replaceAll('\\\\', "\\")
     // let outputTellraw = 'tellraw @a {"rawtext":[{"text":"+'+okay_message+'+"}]}'
     let code = `log(${okay_message})\n`;
     return code;
-};
+  };
   Blockly.Blocks['gametest_gui_actionform'] = {
-    init: function() {
+    init: function () {
       this.appendDummyInput()
-          .appendField("對")
-          .appendField(new Blockly.FieldVariable("item"), "PLAYER")
-          .appendField("送出自訂義選單");
+        .appendField("對")
+        .appendField(new Blockly.FieldVariable("item"), "PLAYER")
+        .appendField("送出自訂義選單");
       this.appendValueInput("SELECT")
-          .setCheck(null)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("選項編號");
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("選項編號");
       this.setColour(180);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
-  Blockly.JavaScript['gametest_gui_actionform'] = function(block) {
+  Blockly.JavaScript['gametest_gui_actionform'] = function (block) {
     var variable_player = Blockly.JavaScript.nameDB_.getName(block.getFieldValue('PLAYER'), Blockly.Variables.NAME_TYPE);
     var value_select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_ATOMIC);
-    
+
     var code = '...;\n';
     return code;
   };
 
   Blockly.Blocks['gametest_kill_player'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("PLAYER")
-          .setCheck("Player")
-          .appendField("殺死玩家");
+        .setCheck("Player")
+        .appendField("殺死玩家");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour(50);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
 
-  Blockly.JavaScript['gametest_kill_player'] = function(block) {
+  Blockly.JavaScript['gametest_kill_player'] = function (block) {
     var value_name = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     var code = `${value_name}.kill()`
     return code;
   };
   Blockly.Blocks['gametest_add_tag'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("PLAYER")
-          .setCheck("Player")
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("對玩家");
+        .setCheck("Player")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("對玩家");
       this.appendValueInput("TAG")
-          .setCheck("String")
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("添加標籤");
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("添加標籤");
       this.setInputsInline(true);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour(50);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
-  Blockly.JavaScript['gametest_add_tag'] = function(block) {
+  Blockly.JavaScript['gametest_add_tag'] = function (block) {
     var value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     var value_tag = Blockly.JavaScript.valueToCode(block, 'TAG', Blockly.JavaScript.ORDER_ATOMIC);
     var code = `${value_player}.addTag(${value_tag})`
@@ -587,24 +605,24 @@ Blockly.JavaScript['gametest_tellraw_command'] = function(block) {
   };
 
   Blockly.Blocks['gametest_remove_tag'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("PLAYER")
-          .setCheck("Player")
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("對玩家");
+        .setCheck("Player")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("對玩家");
       this.appendValueInput("TAG")
-          .setCheck("String")
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("移除標籤");
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("移除標籤");
       this.setInputsInline(true);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour(50);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
-  Blockly.JavaScript['gametest_remove_tag'] = function(block) {
+  Blockly.JavaScript['gametest_remove_tag'] = function (block) {
     var value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     var value_tag = Blockly.JavaScript.valueToCode(block, 'TAG', Blockly.JavaScript.ORDER_ATOMIC);
     var code = `${value_player}.removeTag(${value_tag})`
@@ -612,22 +630,22 @@ Blockly.JavaScript['gametest_tellraw_command'] = function(block) {
   };
 
   Blockly.Blocks['gametest_has_tag'] = {
-    init: function() {
+    init: function () {
       this.appendValueInput("PLAYER")
-          .setCheck("Player")
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("檢查實體");
+        .setCheck("Player")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("檢查實體");
       this.appendValueInput("TAG")
-          .setCheck("String")
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField("是否擁有標籤");
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("是否擁有標籤");
       this.setOutput(true, "Boolean");
       this.setColour(80);
-   this.setTooltip("");
-   this.setHelpUrl("");
+      this.setTooltip("");
+      this.setHelpUrl("");
     }
   };
-  Blockly.JavaScript['gametest_has_tag'] = function(block) {
+  Blockly.JavaScript['gametest_has_tag'] = function (block) {
     var value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     var value_tag = Blockly.JavaScript.valueToCode(block, 'TAG', Blockly.JavaScript.ORDER_ATOMIC);
     var code = `${value_player}.hasTag(${value_tag})`
@@ -638,7 +656,7 @@ Blockly.JavaScript['gametest_tellraw_command'] = function(block) {
 blocks_init(Blockly)
 
 //workspace
-var onresize = function(e) {
+var onresize = function (e) {
   // Compute the absolute coordinates and dimensions of blocklyArea.
   var element = blocklyArea;
   var x = 0;
