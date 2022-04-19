@@ -17,7 +17,7 @@ function blocks_init(Blockly) {
     init: function() {
       this.appendValueInput("ENTITY")
           .setCheck(null)
-          .appendField("取得實體id");
+          .appendField("取得ID");
       this.setOutput(true, "String");
       this.setColour(80);
    this.setTooltip("");
@@ -60,6 +60,41 @@ function blocks_init(Blockly) {
     Minecraft.world.events.entityHit.subscribe(e => {
       ${value_attacker} = e.entity;
       ${value_target} = e.hitEntity;
+      ${statements_code}
+    });
+          `;
+    return code;
+  };
+
+  Blockly.Blocks['gametest_on_block_place'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("當方塊被玩家放置");
+      this.appendValueInput("PLAYER")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("玩家");
+      this.appendValueInput("BLOCK")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("方塊");
+      this.appendStatementInput("CODE")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT);
+      this.setColour(20);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
+  Blockly.JavaScript['gametest_on_block_place'] = function(block) {
+    const value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
+    const value_block = Blockly.JavaScript.valueToCode(block, 'BLOCK', Blockly.JavaScript.ORDER_ATOMIC);
+    const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
+    const code = `
+    Minecraft.world.events.blockPlace.subscribe(e => {
+      ${value_player} = e.block;
+      ${value_block} = e.player;
       ${statements_code}
     });
           `;
@@ -356,12 +391,21 @@ Blockly.JavaScript['gametest_get_player_real_name'] = function(block) {
           .appendField(new Blockly.FieldDropdown([["X座標","location.x"], ["Y座標","location.y"], ["Z座標","location.z"]]), "POS");
       this.appendValueInput("ENTITY")
           .setCheck("Player")
-          .appendField("取得實體座標");
+          .appendField("取得座標");
       this.setOutput(true, "Number");
       this.setColour(80);
    this.setTooltip("");
    this.setHelpUrl("");
     }
+  };
+
+  Blockly.JavaScript['gametest_get_entity_pos'] = function(block) {
+    let dropdown_pos = block.getFieldValue('POS');
+    let value_player = Blockly.JavaScript.valueToCode(block, 'ENTITY', Blockly.JavaScript.ORDER_ATOMIC);
+    
+    let code = `${value_player}.${dropdown_pos}`;
+    
+    return [code, Blockly.JavaScript.ORDER_NONE];
   };
 
   Blockly.Blocks['gametest_getplayersneak'] = {
@@ -384,14 +428,7 @@ this.setHelpUrl("");
     return [code, Blockly.JavaScript.ORDER_NONE];
   };
   
-  Blockly.JavaScript['gametest_get_entity_pos'] = function(block) {
-    let dropdown_pos = block.getFieldValue('POS');
-    let value_player = Blockly.JavaScript.valueToCode(block, 'ENTITY', Blockly.JavaScript.ORDER_ATOMIC);
-    
-    let code = `${value_player}.${dropdown_pos}`;
-    
-    return [code, Blockly.JavaScript.ORDER_NONE];
-  };
+
 
   Blockly.Blocks['gametest_onchat'] = {
     init: function() {
