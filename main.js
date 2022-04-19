@@ -101,6 +101,41 @@ function blocks_init(Blockly) {
     return code;
   };
 
+  Blockly.Blocks['gametest_on_block_break'] = {
+    init: function () {
+      this.appendDummyInput()
+        .appendField("當方塊被玩家破壞");
+      this.appendValueInput("PLAYER")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("玩家");
+      this.appendValueInput("BLOCK")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("方塊");
+      this.appendStatementInput("CODE")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT);
+      this.setColour(20);
+      this.setTooltip("");
+      this.setHelpUrl("");
+    }
+  };
+
+  Blockly.JavaScript['gametest_on_block_break'] = function (block) {
+    const value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
+    const value_block = Blockly.JavaScript.valueToCode(block, 'BLOCK', Blockly.JavaScript.ORDER_ATOMIC);
+    const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
+    const code = `
+    Minecraft.world.events.blockBreak.subscribe(e => {
+      ${value_player} = e.block;
+      ${value_block} = e.player;
+      ${statements_code}
+    });
+          `;
+    return code;
+  };
+
 
   Blockly.Blocks['gametest_on_tick'] = {
     init: function () {
