@@ -27,7 +27,6 @@
   <!-- <script src="custom_renderer.js"></script> -->
 
   <!-- 引入自製模組 -->
-  <script type="module" src="blocks.js"></script>
   <script src="lib.js"></script>
 
   <!-- 網站標題 -->
@@ -48,8 +47,10 @@
   <button onclick="download_js(generate())">下載js檔案</button>
   <button onclick="upload_project()">匯入專案</button>
   <button onclick="download_project()">匯出專案</button>
-  <div id="blocklyDiv" style="width: 1000px;height: 740px;"></div>
-
+  <div id="blocklyArea">
+    <div id="blocklyDiv" style="width: 1000px;height: 900px;"></div>
+  </div>
+  
   <!-- 定義ToolBox內方塊 -->
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="邏輯判斷" colour="%{BKY_LOGIC_HUE}">
@@ -408,6 +409,13 @@
       <label text="實體類別"></label>
       <block type="gametest_getplayername">
         <value name="PLAYER">
+          <block type="variables_get">
+            <field name="VAR">實體</field>
+          </block>
+        </value>
+      </block>
+      <block type="gametest_get_health">
+        <value name="ENTITY">
           <block type="variables_get">
             <field name="VAR">實體</field>
           </block>

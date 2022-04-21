@@ -29,6 +29,8 @@ https://developers.google.com/blockly/guides/overview
 
 ### 有點意思的插件
 
+[max-blocks](https://google.github.io/blockly-samples/examples/max-blocks-demo/)\
+[custom-dialog](https://google.github.io/blockly-samples/examples/custom-dialogs-demo/)\
 [zoom-to-fit](https://github.com/google/blockly-samples/tree/master/plugins/zoom-to-fit)\
 [strict-connection-checker](https://github.com/google/blockly-samples/tree/master/plugins/strict-connection-checker)\
 [dev-tools](https://github.com/google/blockly-samples/tree/master/plugins/dev-tools)
