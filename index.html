@@ -60,14 +60,13 @@
   <button onclick="upload_project()">匯入專案</button>
   <button onclick="download_project()">匯出專案</button>
 
-
   <div id="blocklyArea"></div>
-
 
   <div id="blocklyDiv" style="position: absolute"></div>
 
+
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <category name="邏輯判斷" colour="%{BKY_LOGIC_HUE}">
+    <category name="控制" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <shadow type="math_number">
@@ -305,6 +304,21 @@
           </block>
         </value>
       </block>
+      <block type="gametest_on_player_join">
+        <value name="PLAYER">
+          <block type="variables_get">
+            <field name="VAR">玩家</field>
+          </block>
+        </value>
+      </block>
+      <block type="gametest_on_load"></block>
+      <block type="gametest_on_player_leave">
+        <value name="PLAYER">
+          <block type="variables_get">
+            <field name="VAR">玩家名稱</field>
+          </block>
+        </value>
+      </block>
       <block type="gametest_on_block_place">
         <value name="PLAYER">
           <block type="variables_get">
@@ -459,6 +473,8 @@
 
   <script src="blocks.js"></script>
   <script>
+    window.onbeforeunload = () => saveBlocks();
+    window.onload = () => importBlocks();
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
     var workspace = Blockly.inject(blocklyDiv,

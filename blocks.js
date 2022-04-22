@@ -43,6 +43,61 @@ Blockly.JavaScript['gametest_on_hit_entity'] = function (block) {
       Minecraft.world.events.entityHit.subscribe(e => {
         ${value_attacker} = e.entity;
         ${value_target} = e.hitEntity;
+        if (!${value_attacker}.id) return;
+        ${statements_code}
+      });
+            `;
+    return code;
+};
+Blockly.Blocks['gametest_on_player_join'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("當玩家加入");
+        this.appendValueInput("PLAYER")
+            .setCheck(null)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("玩家");
+        this.appendStatementInput("CODE")
+            .setCheck(null)
+            .setAlign(Blockly.ALIGN_RIGHT);
+        this.setColour(20);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript['gametest_on_player_join'] = function (block) {
+    const value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
+    const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
+    const code = `
+      Minecraft.world.events.playerJoin.subscribe(e => {
+        ${value_player} = e.player;
+        ${statements_code}
+      });
+            `;
+    return code;
+};
+Blockly.Blocks['gametest_on_player_leave'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("當玩家退出");
+        this.appendValueInput("PLAYER")
+            .setCheck(null)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("玩家名稱");
+        this.appendStatementInput("CODE")
+            .setCheck(null)
+            .setAlign(Blockly.ALIGN_RIGHT);
+        this.setColour(20);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript['gametest_on_player_leave'] = function (block) {
+    const value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
+    const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
+    const code = `
+      Minecraft.world.events.playerLeave.subscribe(e => {
+        ${value_player} = e.playerName;
         ${statements_code}
       });
             `;
@@ -133,6 +188,21 @@ Blockly.JavaScript['gametest_on_tick'] = function (block) {
       });
         `;
     return code;
+};
+Blockly.Blocks['gametest_on_load'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("當行為包載入完畢");
+        this.appendStatementInput("CODE")
+            .setCheck(null);
+        this.setColour(20);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+Blockly.JavaScript['gametest_on_load'] = function (block) {
+    const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
+    return statements_code;
 };
 Blockly.Blocks['get_substring'] = {
     init: function () {
