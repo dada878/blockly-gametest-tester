@@ -129,8 +129,8 @@ Blockly.JavaScript['gametest_on_block_place'] = function (block) {
     const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     const code = `
       Minecraft.world.events.blockPlace.subscribe(e => {
-        ${value_player} = e.block;
-        ${value_block} = e.player;
+        ${value_player} = e.player;
+        ${value_block} = e.block;
         ${statements_code}
       });
             `;
@@ -162,8 +162,8 @@ Blockly.JavaScript['gametest_on_block_break'] = function (block) {
     const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     const code = `
       Minecraft.world.events.blockBreak.subscribe(e => {
-        ${value_player} = e.block;
-        ${value_block} = e.player;
+        ${value_player} = e.player;
+        ${value_block} = e.block;
         ${statements_code}
       });
             `;
