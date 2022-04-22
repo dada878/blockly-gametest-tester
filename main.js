@@ -17,8 +17,8 @@ var workspace = Blockly.inject(
          {controls: true,
           wheel: true,
           startScale: 1.0,
-          maxScale: 3,
-          minScale: 0.3,
+          maxScale: 1.5,
+          minScale: 0.8,
           scaleSpeed: 1.2,
           pinch: true},
      trashcan: true
@@ -34,7 +34,6 @@ var onresize = function (e) {
     y += element.offsetTop;
     element = element.offsetParent;
   } while (element);
-  // Position blocklyDiv over blocklyArea.
   blocklyDiv.style.left = x + 'px';
   blocklyDiv.style.top = y + 'px';
   blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';

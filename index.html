@@ -44,20 +44,16 @@
   <button onclick="download_js(generate())">下載js檔案</button>
   <button onclick="upload_project()">匯入專案</button>
   <button onclick="download_project()">匯出專案</button>
-  <div id="blocklyArea">
-    <div id="blocklyDiv" style="width: 1000px;height: 900px;"></div>
+  <div id="app">
+    <div id="blocklyArea">
+      <div id="blocklyDiv" style="width: 1000px;height: 900px;"></div>
+    </div>
   </div>
+
   
   <!-- 定義ToolBox內方塊 -->
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="邏輯判斷" colour="%{BKY_LOGIC_HUE}">
-      <block type="controls_if"></block>
-      <block type="logic_compare"></block>
-      <block type="logic_operation"></block>
-      <block type="logic_negate"></block>
-      <block type="logic_boolean"></block>
-    </category>
-    <category name="流程控制" colour="%{BKY_LOOPS_HUE}">
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <shadow type="math_number">
@@ -67,6 +63,12 @@
       </block>
 
       <block type="lib_while"></block>
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
 
     </category>
     <category name="數學" colour="%{BKY_MATH_HUE}">
