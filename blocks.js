@@ -347,8 +347,8 @@ Blockly.JavaScript['gametest_getitemamount'] = function (block) {
 Blockly.Blocks['gametest_getitemdata'] = {
     init: function () {
         this.appendValueInput("ITEM")
-            .setCheck("Item")
-            .appendField("取得物品數據值");
+            .setCheck(null)
+            .appendField("取得資料值");
         this.setOutput(true, "Number");
         this.setColour(80);
         this.setTooltip("");

@@ -84,7 +84,7 @@
     </category>
 
     </category>
-    <category name="數學" colour="%{BKY_MATH_HUE}">
+    <category name="運算" colour="%{BKY_MATH_HUE}">
       <block type="math_number">
         <field name="NUM">123</field>
       </block>
@@ -226,8 +226,7 @@
     </category>
     <category name="變數" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
     <category name="函式" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
-    <sep></sep>
-    <category name="遊戲控制" colour="50">
+    <category name="遊戲控制　" colour="50">
       <block type="gametest_run_command">
         <value name="COMMAND">
           <block type="text">
@@ -371,6 +370,13 @@
           </block>
         </value>
       </block>
+      <block type="gametest_getitemdata">
+        <value name="ITEM">
+          <block type="variables_get">
+            <field name="VAR">物品/方塊</field>
+          </block>
+        </value>
+      </block>
       <block type="gametest_get_entity_pos">
         <value name="ENTITY">
           <block type="variables_get">
@@ -394,21 +400,7 @@
         </value>
       </block>
       <label text="物品類別"></label>
-      <block type="gametest_getitemid">
-        <value name="ITEM">
-          <block type="variables_get">
-            <field name="VAR">物品</field>
-          </block>
-        </value>
-      </block>
       <block type="gametest_getitemamount">
-        <value name="ITEM">
-          <block type="variables_get">
-            <field name="VAR">物品</field>
-          </block>
-        </value>
-      </block>
-      <block type="gametest_getitemdata">
         <value name="ITEM">
           <block type="variables_get">
             <field name="VAR">物品</field>
@@ -459,7 +451,7 @@
       </block>
 
     </category>
-    <category name="自訂UI" colour="180">
+    <category name="表單介面" colour="180">
       <block type="gametest_gui_actionform" disabled="true">
         <value name="PLAYER">
           <field name="VAR">玩家</field>
