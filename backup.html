@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh_tw">
 
 <head>
-  <meta charset="utf-8">
-  <title>Blockly Demo: Resizable Blockly (Part 2)</title>
+  <!-- 定義Meta -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 引入Blockly套件 -->
   <script src="modules/blockly_compressed.js"></script>
   <script src="modules/blocks_compressed.js"></script>
   <script src="modules/javascript_compressed.js"></script>
@@ -22,50 +26,32 @@
   <!-- 引入自製模組 -->
   <script src="lib.js"></script>
 
+  <!-- 網站標題 -->
+  <title>Gametest編輯器</title>
 
+  <!-- 隱藏000webhost的Logo -->
   <style>
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-    }
-
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-      overflow: hidden;
-    }
-
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-
-    table {
-      height: 100%;
-      width: 100%;
-    }
-
-    #blocklyArea {
-      height: 99%;
+    img[alt="www.000webhost.com"] {
+      display: none;
     }
   </style>
+
 </head>
 
 <body>
-
   <button onclick="check()">轉換程式碼</button>
   <button onclick="download_pack('hello',generate())">生成並下載模組</button>
   <button onclick="download_js(generate())">下載js檔案</button>
   <button onclick="upload_project()">匯入專案</button>
   <button onclick="download_project()">匯出專案</button>
+  <div id="app">
+    <div id="blocklyArea">
+      <div id="blocklyDiv" style="width: 1000px;height: 900px;"></div>
+    </div>
+  </div>
 
-
-  <div id="blocklyArea"></div>
-
-
-  <div id="blocklyDiv" style="position: absolute"></div>
-
+  
+  <!-- 定義ToolBox內方塊 -->
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="邏輯判斷" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_repeat_ext">
@@ -225,6 +211,17 @@
         </value>
       </block>
     </category>
+    <category name="陣列" colour="%{BKY_LISTS_HUE}">
+      <block type="lists_create_with">
+        <mutation items="0"></mutation>
+      </block>
+      <block type="lists_create_with"></block>
+      <block type="lists_length"></block>
+
+      <!-- TODO:添加添加/取得/刪除/替換/尋找等方塊(參考Scratch) -->
+
+    </category>
+    <sep></sep>
     <category name="變數" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
     <category name="函式" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
     <sep></sep>
@@ -457,53 +454,9 @@
     </category>
   </xml>
 
+  <!-- 引入模組 -->
   <script src="blocks.js"></script>
-  <script>
-    var blocklyArea = document.getElementById('blocklyArea');
-    var blocklyDiv = document.getElementById('blocklyDiv');
-    var workspace = Blockly.inject(blocklyDiv,
-      {
-        toolbox: document.getElementById('toolbox'),
-        grid: {
-          spacing: 20,
-          length: 3,
-          colour: '#ccc',
-          snap: true
-        },
-        trashcan: true,
-        zoom: {
-          controls: true,
-          wheel: true,
-          startScale: 1.0,
-          maxScale: 1.5,
-          minScale: 0.8,
-          scaleSpeed: 1.2,
-          pinch: true
-        },
-        trashcan: true
-      }
-    );
-    var onresize = function (e) {
-      // Compute the absolute coordinates and dimensions of blocklyArea.
-      var element = blocklyArea;
-      var x = 0;
-      var y = 0;
-      do {
-        x += element.offsetLeft;
-        y += element.offsetTop;
-        element = element.offsetParent;
-      } while (element);
-      // Position blocklyDiv over blocklyArea.
-      blocklyDiv.style.left = x + 'px';
-      blocklyDiv.style.top = y + 'px';
-      blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-      blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-      Blockly.svgResize(workspace);
-    };
-    window.addEventListener('resize', onresize, false);
-    onresize();
-    Blockly.svgResize(workspace);
-  </script>
+  <script src="main.js"></script>
 </body>
 
 </html>

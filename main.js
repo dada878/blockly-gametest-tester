@@ -13,15 +13,16 @@ var workspace = Blockly.inject(
       snap: true
     },
     trashcan: true,
-    zoom:
-         {controls: true,
-          wheel: true,
-          startScale: 1.0,
-          maxScale: 1.5,
-          minScale: 0.8,
-          scaleSpeed: 1.2,
-          pinch: true},
-     trashcan: true
+    zoom: {
+      controls: true,
+      wheel: true,
+      startScale: 1.0,
+      maxScale: 1.5,
+      minScale: 0.8,
+      scaleSpeed: 1.2,
+      pinch: true
+    },
+    trashcan: true
   },
 );
 
