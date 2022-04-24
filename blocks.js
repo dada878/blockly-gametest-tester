@@ -453,7 +453,7 @@ Blockly.Blocks['gametest_get_health'] = {
 };
 Blockly.JavaScript['gametest_get_health'] = function (block) {
     const value_entity = Blockly.JavaScript.valueToCode(block, 'ENTITY', Blockly.JavaScript.ORDER_ATOMIC);
-    let code = `${value_entity}.getComponent("minecraft:health").current`;
+    let code = `${value_entity}.getComponent('minecraft:health').current`;
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.Blocks['gametest_check_block_is_air'] = {
