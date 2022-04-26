@@ -20,7 +20,7 @@ function download_project() {
   let project_name = prompt("輸入專案名稱");
 
   var element = document.createElement('a');
-  element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(xml_text));
+  element.setAttribute('href', 'data:application/gbs;charset=utf-8,' + encodeURIComponent(xml_text));
   element.setAttribute('download', `${project_name}.gbs`);
 
   element.style.display = 'none';
