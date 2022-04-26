@@ -4,58 +4,24 @@
 <head>
   <meta charset="utf-8">
   <title>Gametest編輯器</title>
-  <script src="modules/blockly_compressed.js"></script>
-  <script src="modules/blocks_compressed.js"></script>
-  <script src="modules/javascript_compressed.js"></script>
-  <script src="msg/js/zh-hant.js"></script>
+  <script src="res/modules/blockly_compressed.js"></script>
+  <script src="res/modules/blocks_compressed.js"></script>
+  <script src="res/modules/javascript_compressed.js"></script>
+  <script src="res/msg/js/zh-hant.js"></script>
 
-  <!-- JsZip檔案處理套件 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"
-    integrity="sha512-xQBQYt9UcgblF6aCMrwU1NkVA7HCXaSN2oq0so80KO+y68M+n64FOcqgav4igHe6D5ObBLIf68DWv+gfBowczg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <!-- 自定義ToolBox -->
-  <link rel="stylesheet" href="index.css">
-  <script src="custom_category.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- 引入自製模組 -->
-  <script src="lib.js"></script>
-
-
-  <style>
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-    }
-
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-      overflow: hidden;
-    }
-
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-
-    table {
-      height: 100%;
-      width: 100%;
-    }
-
-    #blocklyArea {
-      height: 99%;
-    }
-  </style>
+  <link rel="stylesheet" href="src/index.css">
+  <script src="src/custom_category.js"></script>
+  <script src="src/lib.js"></script>
 </head>
 
 <body>
 
   <button onclick="check()">轉換程式碼</button>
-  <button onclick="download_pack('hello',generate())">生成並下載模組</button>
+  <button onclick="download_pack('addon',generate())">生成並下載模組</button>
   <button onclick="download_js(generate())">下載js檔案</button>
   <button onclick="upload_project()">匯入專案</button>
   <button onclick="download_project()">匯出專案</button>
@@ -63,7 +29,6 @@
   <div id="blocklyArea"></div>
 
   <div id="blocklyDiv" style="position: absolute"></div>
-
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="控制" colour="%{BKY_LOGIC_HUE}">
@@ -463,7 +428,7 @@
     </category>
   </xml>
 
-  <script src="blocks.js"></script>
+  <script src="src/blocks.js"></script>
   <script>
     window.onbeforeunload = () => saveBlocks();
     window.onload = () => importBlocks();
@@ -492,7 +457,6 @@
       }
     );
     var onresize = function (e) {
-      // Compute the absolute coordinates and dimensions of blocklyArea.
       var element = blocklyArea;
       var x = 0;
       var y = 0;
@@ -501,7 +465,6 @@
         y += element.offsetTop;
         element = element.offsetParent;
       } while (element);
-      // Position blocklyDiv over blocklyArea.
       blocklyDiv.style.left = x + 'px';
       blocklyDiv.style.top = y + 'px';
       blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';

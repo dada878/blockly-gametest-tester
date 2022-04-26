@@ -1,3 +1,5 @@
+// see FileSaver.js
+
 function generate() {
   var generate_code = Blockly.JavaScript.workspaceToCode(workspace);
   var init_code = `import * as Minecraft from 'mojang-minecraft';\nconst log = function(message) {let okay_message = message.toString().replaceAll('\\"',"''").replaceAll('\\\\',"/");Minecraft.world.getDimension("overworld").runCommand(\`tellraw @a {"rawtext":[{"text":"\${okay_message}"}]}\`)}\n`
@@ -101,7 +103,7 @@ function uuid() {
 }
 
 function download_pack(packName, code) {
-  var manifest = {
+  const manifest = {
     "format_version": 2,
     "header": {
       "description": "§e此附加包使用§bGametest生成器§e製作！",
@@ -116,7 +118,7 @@ function download_pack(packName, code) {
         "type": "javascript",
         "uuid": "cb4ad4b0-0607-11ec-9a03-0242ac130003",
         "version": [0, 0, 1],
-        "entry": "scripts/main.js"
+        "entry": "blockly-gametest/main.js"
       }
     ],
     "dependencies": [
@@ -135,28 +137,21 @@ function download_pack(packName, code) {
     ]
   }
 
-  var zip = new JSZip();
+  let mcpack = new JSZip();
   //添加文字檔案
-  zip.file("manifest.json", JSON.stringify(manifest));
+  mcpack.file("manifest.json", JSON.stringify(manifest));
   //添加資料夾
-  var script = zip.folder("scripts");
+  let script = mcpack.folder("blockly-gametest");
   script.file("main.js", code);
 
-  zip.generateAsync({ type: 'blob' }).then(function (content) {
-    var filename = packName + '.mcpack';
-    var el = document.createElement('a');
-    el.download = filename;
-    el.style.display = 'none';
-    el.href = URL.createObjectURL(content);
-    document.body.appendChild(el);
-    el.click();
-    document.body.removeChild(el);
+  mcpack.generateAsync({ type: 'blob' }).then(function (content) {
+    saveAs(content, packName + '.mcpack');
   });
 }
 
 function download_js(code) {
   var element = document.createElement('a');
-  element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(code));
+  element.setAttribute('href', 'data:application/js;charset=utf-8,' + encodeURIComponent(code));
   element.setAttribute('download', 'script.js');
 
   element.style.display = 'none';
