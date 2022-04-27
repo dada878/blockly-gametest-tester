@@ -1,10 +1,11 @@
-window.onbeforeunload = () => saveBlocks();
-window.onload = () => importBlocks();
+var blocklyArea;
+var blocklyDiv;
+var workspace;
 
-var blocklyArea = document.getElementById('blocklyArea');
-var blocklyDiv = document.getElementById('blocklyDiv');
-var workspace = Blockly.inject(
-  blocklyDiv, {
+blocklyArea = document.getElementById('blocklyArea');
+blocklyDiv = document.getElementById('blocklyDiv');
+workspace = Blockly.inject(blocklyDiv,
+  {
     toolbox: document.getElementById('toolbox'),
     grid: {
       spacing: 20,
@@ -23,9 +24,8 @@ var workspace = Blockly.inject(
       pinch: true
     },
     trashcan: true
-  },
+  }
 );
-
 var onresize = function (e) {
   var element = blocklyArea;
   var x = 0;
@@ -44,3 +44,7 @@ var onresize = function (e) {
 window.addEventListener('resize', onresize, false);
 onresize();
 Blockly.svgResize(workspace);
+
+window.onbeforeunload = () => saveBlocks();
+window.onload = () => importBlocks();
+

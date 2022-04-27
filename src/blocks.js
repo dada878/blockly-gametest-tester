@@ -1,4 +1,3 @@
-
 Blockly.Blocks['gametest_get_entity_id'] = {
     init: function () {
         this.appendValueInput("ENTITY")
