@@ -1,4 +1,5 @@
 # Blockly-Gametest
+[![wakatime](https://wakatime.com/badge/user/56ad6549-a054-44d0-b495-36b06ce29e9f/project/eb652765-73eb-4875-83df-c8168526d00a.svg)](https://wakatime.com/badge/user/56ad6549-a054-44d0-b495-36b06ce29e9f/project/eb652765-73eb-4875-83df-c8168526d00a)
 ### 簡介
 
 可以使用圖形化的方塊程式輕鬆製作自己的Gametest包
