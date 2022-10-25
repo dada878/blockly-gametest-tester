@@ -101,31 +101,39 @@ function uuid() {
     return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
   });
 }
-//try刪除一下uuid()
+
 function download_pack(packName, code) {
   const manifest = {
     "format_version": 2,
     "header": {
       "description": "§e此附加包使用§bGametest生成器§e製作！",
       "name": packName,
-      "uuid": "ee649bcf-256c-4013-9068-6a802b89d756",
+      "uuid": uuid(),
       "version": [0, 0, 1],
-      "min_engine_version": [1, 19, 30]
+      "min_engine_version": [1, 14, 0]
     },
     "modules": [
       {
         "description": "Plugin Module",
         "type": "javascript",
-        "uuid": "fa6e90c8-c925-460f-8155-c8a60b753caa",
+        "uuid": "cb4ad4b0-0607-11ec-9a03-0242ac130003",
         "version": [0, 0, 1],
         "entry": "blockly-gametest/main.js"
       }
     ],
     "dependencies": [
-        {
-            "uuid": "66c6e9a8-3093-462a-9c36-dbb052165822",
-            "version": [0, 0, 1]
-        }
+      {
+        "uuid": "b26a4d4c-afdf-4690-88f8-931846312678",
+        "version": [0, 1, 0]
+      },
+      {
+        "uuid": "6f4b6893-1bb6-42fd-b458-7fa3d0c89616",
+        "version": [0, 1, 0]
+      },
+      {
+        "uuid": "2BD50A27-AB5F-4F40-A596-3641627C635E",
+        "version": [0, 1, 0]
+      }
     ]
   }
 
