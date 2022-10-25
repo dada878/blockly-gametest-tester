@@ -101,14 +101,14 @@ function uuid() {
     return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
   });
 }
-
+//try刪除一下uuid()
 function download_pack(packName, code) {
   const manifest = {
     "format_version": 2,
     "header": {
       "description": "§e此附加包使用§bGametest生成器§e製作！",
       "name": packName,
-      "uuid": uuid(),
+      "uuid": "ee649bcf-256c-4013-9068-6a802b89d756",
       "version": [0, 0, 1],
       "min_engine_version": [1, 19, 30]
     },
