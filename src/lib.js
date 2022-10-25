@@ -122,18 +122,10 @@ function download_pack(packName, code) {
       }
     ],
     "dependencies": [
-      {
-        "uuid": "b26a4d4c-afdf-4690-88f8-931846312678",
-        "version": [0, 1, 0]
-      },
-      {
-        "uuid": "6f4b6893-1bb6-42fd-b458-7fa3d0c89616",
-        "version": [0, 1, 0]
-      },
-      {
-        "uuid": "2BD50A27-AB5F-4F40-A596-3641627C635E",
-        "version": [0, 1, 0]
-      }
+        {
+            "uuid": "66c6e9a8-3093-462a-9c36-dbb052165822",
+            "version": [0, 0, 1]
+        }
     ]
   }
 
