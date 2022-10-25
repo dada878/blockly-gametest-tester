@@ -110,13 +110,13 @@ function download_pack(packName, code) {
       "name": packName,
       "uuid": uuid(),
       "version": [0, 0, 1],
-      "min_engine_version": [1, 14, 0]
+      "min_engine_version": [1, 19, 30]
     },
     "modules": [
       {
         "description": "Plugin Module",
         "type": "javascript",
-        "uuid": "cb4ad4b0-0607-11ec-9a03-0242ac130003",
+        "uuid": "fa6e90c8-c925-460f-8155-c8a60b753caa",
         "version": [0, 0, 1],
         "entry": "blockly-gametest/main.js"
       }
