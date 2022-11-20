@@ -2,7 +2,7 @@
 
 function generate() {
   var generate_code = Blockly.JavaScript.workspaceToCode(workspace);
-  var init_code = `import * as Minecraft from 'mojang-minecraft';\nconst log = function(message) {let okay_message = message.toString().replaceAll('\\"',"''").replaceAll('\\\\',"/");Minecraft.world.getDimension("overworld").runCommand(\`tellraw @a {"rawtext":[{"text":"\${okay_message}"}]}\`)}\n`
+  var init_code = `import * as GameTest from "@minecraft/server-gametest";\nimport { BlockLocation } from "@minecraft/server";\nconst log = function(message) {let okay_message = message.toString().replaceAll('\\"',"''").replaceAll('\\\\',"/");Minecraft.world.getDimension("overworld")player.runCommand(\`tellraw @a {"rawtext":[{"text":"\${okay_message}"}]}\`)}\n`
   return init_code + generate_code
 }
 function check() {
@@ -110,29 +110,26 @@ function download_pack(packName, code) {
       "name": packName,
       "uuid": uuid(),
       "version": [0, 0, 1],
-      "min_engine_version": [1, 14, 0]
+      "min_engine_version": [1, 19, 0]
     },
     "modules": [
       {
         "description": "Plugin Module",
-        "type": "javascript",
-        "uuid": "cb4ad4b0-0607-11ec-9a03-0242ac130003",
+        "language": "javascript",
+        "type": "script",
+        "uuid": uuid(),
         "version": [0, 0, 1],
         "entry": "blockly-gametest/main.js"
       }
     ],
     "dependencies": [
       {
-        "uuid": "b26a4d4c-afdf-4690-88f8-931846312678",
-        "version": [0, 1, 0]
+        "module_name": "@minecraft/server",
+        "version": "1.0.0-beta"
       },
       {
-        "uuid": "6f4b6893-1bb6-42fd-b458-7fa3d0c89616",
-        "version": [0, 1, 0]
-      },
-      {
-        "uuid": "2BD50A27-AB5F-4F40-A596-3641627C635E",
-        "version": [0, 1, 0]
+        "module_name": "@minecraft/server-gametest",
+        "version": "1.0.0-beta"
       }
     ]
   }
