@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Gametest編輯器</title>
+  <script src="res/modules/blockly_compressed.js"></script>
+  <script src="res/modules/blocks_compressed.js"></script>
+  <script src="res/modules/javascript_compressed.js"></script>
+  <script src="res/msg/js/zh-hant.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="src/index.css">
+  <script src="src/custom_category.js"></script>
+  <script src="src/lib.js"></script>
+</head>
+
+<body>
+
+  <button onclick="check()">轉換程式碼</button>
+  <button onclick="download_pack('addon',generate())">生成並下載模組</button>
+  <button onclick="download_js(generate())">下載js檔案</button>
+  <button onclick="upload_project()">匯入專案</button>
+  <button onclick="download_project()">匯出專案</button>
+
+  <div id="blocklyArea"></div>
+
+  <div id="blocklyDiv" style="position: absolute"></div>
+
+  <div id="import_toolbox"></div>
+
+  <script src="src/blocks.js"></script>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+    <category name="控制" colour="%{BKY_LOGIC_HUE}">
+        <block type="controls_repeat_ext">
+            <value name="TIMES">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="lib_while"></block>
+        <block type="controls_if"></block>
+        <block type="logic_compare"></block>
+        <block type="logic_operation"></block>
+        <block type="logic_negate"></block>
+        <block type="logic_boolean"></block>
+    </category>
+    
+    <category name="運算" colour="%{BKY_MATH_HUE}">
+        <block type="math_number">
+            <field name="NUM">123</field>
+        </block>
+        <block type="math_arithmetic">
+            <value name="A">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="B">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_single">
+            <value name="NUM">
+                <shadow type="math_number">
+                    <field name="NUM">9</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_trig">
+            <value name="NUM">
+                <shadow type="math_number">
+                    <field name="NUM">45</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_constant"></block>
+        <block type="math_number_property">
+            <value name="NUMBER_TO_CHECK">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_round">
+            <value name="NUM">
+                <shadow type="math_number">
+                    <field name="NUM">3.1</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_modulo">
+            <value name="DIVIDEND">
+                <shadow type="math_number">
+                    <field name="NUM">64</field>
+                </shadow>
+            </value>
+            <value name="DIVISOR">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="math_random_int">
+            <value name="FROM">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+            <value name="TO">
+                <shadow type="math_number">
+                    <field name="NUM">100</field>
+                </shadow>
+            </value>
+        </block>
+    </category>
+    <category name="文字" colour="%{BKY_TEXTS_HUE}">
+        <block type="text"></block>
+        <block type="text_join"></block>
+        <block type="text_length">
+            <value name="VALUE">
+                <shadow type="text">
+                    <field name="TEXT">abc</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="get_substring">
+            <value name="STRING">
+                <shadow type="text">
+                    <field name="TEXT">Hello</field>
+                </shadow>
+            </value>
+            <value name="START">
+                <shadow type="math_number">
+                    <field name="NUM">2</field>
+                </shadow>
+            </value>
+            <value name="END">
+                <shadow type="math_number">
+                    <field name="NUM">4</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="lib_index_string">
+            <value name="STRING">
+                <shadow type="text">
+                    <field name="TEXT">Hello</field>
+                </shadow>
+            </value>
+            <value name="INDEX">
+                <shadow type="math_number">
+                    <field name="NUM">1</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="is_str_in_str">
+            <value name="STRING">
+                <shadow type="text">
+                    <field name="TEXT">ABCD</field>
+                </shadow>
+            </value>
+            <value name="TARGET">
+                <shadow type="text">
+                    <field name="TEXT">C</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="text_changeCase">
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT">abc</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="text_trim">
+            <value name="TEXT">
+                <shadow type="text">
+                    <field name="TEXT">abc</field>
+                </shadow>
+            </value>
+        </block>
+    </category>
+    <category name="變數" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
+    <category name="函式" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
+    <category name="遊戲控制　" colour="50">
+        <block type="gametest_run_command">
+            <value name="COMMAND">
+                <block type="text">
+                    <field name="TEXT">give @a apple</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_tellraw_command">
+            <value name="MESSAGE">
+                <block type="text">
+                    <field name="TEXT">hello</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_add_tag">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                </block>
+            </value>
+            <value name="TAG">
+                <block type="text">
+                    <field name="TEXT">Tag</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_remove_tag">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                </block>
+            </value>
+            <value name="TAG">
+                <block type="text">
+                    <field name="TEXT">Tag</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_kill_player">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                </block>
+            </value>
+        </block>
+    </category>
+    <category name="監聽事件" colour="20">
+        <block type="gametest_onchat">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                </block>
+            </value>
+            <value name="MESSAGE">
+                <block type="variables_get">
+                    <field name="VAR">訊息</field>
+                </block>
+            </value>
+            <value name="CANCEL">
+                <block type="logic_boolean">
+                    <field name="BOOLEAN"></field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_on_hit_entity">
+            <value name="ATTACKER">
+                <block type="variables_get">
+                    <field name="VAR">攻擊的實體</field>
+                </block>
+            </value>
+            <value name="TARGET">
+                <block type="variables_get">
+                    <field name="VAR">受擊的實體</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_on_player_join">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_on_load"></block>
+        <block type="gametest_on_player_leave">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家名稱</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_on_block_place">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                </block>
+            </value>
+            <value name="BLOCK">
+                <block type="variables_get">
+                    <field name="VAR">方塊</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_on_block_break">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                </block>
+            </value>
+            <value name="BLOCK">
+                <block type="variables_get">
+                    <field name="VAR">方塊</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_on_tick"></block>
+        <block type="gametest_onitemuse">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                </block>
+            </value>
+            <value name="ITEM">
+                <block type="variables_get">
+                    <field name="VAR">物品</field>
+                </block>
+            </value>
+            <value name="CANCEL">
+                <block type="logic_boolean">
+                    <field name="BOOLEAN"></field>
+                </block>
+            </value>
+        </block>
+    </category>
+    <category name="遊戲參數" colour="80">
+        <label text="通用類別"></label>
+        <block type="gametest_get_entity_id">
+            <value name="ENTITY">
+                <block type="variables_get">
+                    <field name="VAR">實體/方塊/物品</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_getitemdata">
+            <value name="ITEM">
+                <block type="variables_get">
+                    <field name="VAR">物品/方塊</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_get_entity_pos">
+            <value name="ENTITY">
+                <block type="variables_get">
+                    <field name="VAR">實體/方塊</field>
+                </block>
+            </value>
+        </block>
+        <label text="玩家類別"></label>
+        <block type="gametest_get_player_real_name">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_getplayersneak">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">玩家</field>
+                </block>
+            </value>
+        </block>
+        <label text="物品類別"></label>
+        <block type="gametest_getitemamount">
+            <value name="ITEM">
+                <block type="variables_get">
+                    <field name="VAR">物品</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_getitemname">
+            <value name="ITEM">
+                <block type="variables_get">
+                    <field name="VAR">物品</field>
+                </block>
+            </value>
+        </block>
+        <label text="實體類別"></label>
+        <block type="gametest_getplayername">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">實體</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_get_health">
+            <value name="ENTITY">
+                <block type="variables_get">
+                    <field name="VAR">實體</field>
+                </block>
+            </value>
+        </block>
+        <block type="gametest_has_tag">
+            <value name="PLAYER">
+                <block type="variables_get">
+                    <field name="VAR">實體</field>
+                </block>
+            </value>
+            <value name="TAG">
+                <block type="text">
+                    <field name="TEXT">Tag</field>
+                </block>
+            </value>
+        </block>
+        <label text="方塊類別"></label>
+        <block type="gametest_check_block_is_air">
+            <value name="BLOCK">
+                <block type="variables_get">
+                    <field name="VAR">方塊</field>
+                </block>
+            </value>
+        </block>
+
+    </category>
+    <category name="表單介面" colour="180">
+        <block type="gametest_gui_actionform" disabled="true">
+            <value name="PLAYER">
+                <field name="VAR">玩家</field>
+            </value>
+            <value name="SELECT">
+                <field name="VAR">選項</field>
+            </value>
+        </block>
+    </category>
+</xml>
+
+  <script src="src/main.js"></script>
+
+</body>
+
+</html>
