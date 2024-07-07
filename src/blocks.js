@@ -39,8 +39,8 @@ Blockly.JavaScript['gametest_on_hit_entity'] = function (block) {
     const value_target = Blockly.JavaScript.valueToCode(block, 'TARGET', Blockly.JavaScript.ORDER_ATOMIC);
     const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     const code = `
-      Minecraft.world.events.entityHit.subscribe(e => {
-        ${value_attacker} = e.entity;
+      world.afterEvents.entityHitEntity.subscribe((e) => {
+        ${value_attacker} = e.damagingEntity;
         ${value_target} = e.hitEntity;
         if (!${value_attacker}.id) return;
         ${statements_code}
@@ -68,8 +68,8 @@ Blockly.JavaScript['gametest_on_player_join'] = function (block) {
     const value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     const code = `
-      Minecraft.world.events.playerJoin.subscribe(e => {
-        ${value_player} = e.player;
+      world.afterEvents.playerJoin.subscribe((e) => {
+        ${value_player} = e.playerName;
         ${statements_code}
       });
             `;
@@ -95,7 +95,7 @@ Blockly.JavaScript['gametest_on_player_leave'] = function (block) {
     const value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     const code = `
-      Minecraft.world.events.playerLeave.subscribe(e => {
+      world.afterEvents.PlayerLeave.subscribe((e) => {
         ${value_player} = e.playerName;
         ${statements_code}
       });
@@ -127,9 +127,9 @@ Blockly.JavaScript['gametest_on_block_place'] = function (block) {
     const value_block = Blockly.JavaScript.valueToCode(block, 'BLOCK', Blockly.JavaScript.ORDER_ATOMIC);
     const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     const code = `
-      Minecraft.world.events.blockPlace.subscribe(e => {
+      world.afterEvents.playerPlaceBlock.subscribe((e) => {
         ${value_player} = e.player;
-        ${value_block} = e.block;
+        ${value_block} = e.extends;
         ${statements_code}
       });
             `;
@@ -160,9 +160,9 @@ Blockly.JavaScript['gametest_on_block_break'] = function (block) {
     const value_block = Blockly.JavaScript.valueToCode(block, 'BLOCK', Blockly.JavaScript.ORDER_ATOMIC);
     const statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     const code = `
-      Minecraft.world.events.blockBreak.subscribe(e => {
+      world.afterEvents.playerBreakBlock.subscribe((e) => 
         ${value_player} = e.player;
-        ${value_block} = e.block;
+        ${value_block} = e.extends;
         ${statements_code}
       });
             `;
@@ -182,7 +182,7 @@ Blockly.Blocks['gametest_on_tick'] = {
 Blockly.JavaScript['gametest_on_tick'] = function (block) {
     var statements_code = Blockly.JavaScript.statementToCode(block, 'CODE');
     var code = `
-      Minecraft.world.events.tick.subscribe(e => {
+      system.runInterval(() => {
       ${statements_code}
       });
         `;
@@ -398,9 +398,9 @@ Blockly.JavaScript['gametest_onitemuse'] = function (block) {
     }
 
     let code = `
-    Minecraft.world.events.beforeItemUse.subscribe(e => {
+    world.afterEvents.ItemCompleteUse.subscribe((e) => 
     ${cancel}
-    ${value_item} = e.item;
+    ${value_item} = e.itemStack;
     ${value_player} = e.source;
     ${statements_do}
     });
@@ -549,7 +549,7 @@ Blockly.JavaScript['gametest_onchat'] = function (block) {
     }
 
     let code = `
-  Minecraft.world.events.beforeChat.subscribe(e => {
+  world.beforeEvents.chatSend.subscribe((e) => {
     ${cancel}
     ${value_player} = e.sender;
     ${value_message} = e.message;
@@ -575,7 +575,7 @@ Blockly.JavaScript['gametest_run_command'] = function (block) {
     let dropdown_dimension = block.getFieldValue('DIMENSION');
     let value_command = Blockly.JavaScript.valueToCode(block, 'COMMAND', Blockly.JavaScript.ORDER_ATOMIC);
 
-    let code = `Minecraft.world.getDimension("${dropdown_dimension}").runCommand(${value_command});\n`;
+    let code = `world.getDimension("${dropdown_dimension}").runCommand(${value_command});\n`;
     return code;
 };
 Blockly.Blocks['gametest_tellraw_command'] = {
@@ -657,7 +657,10 @@ Blockly.Blocks['gametest_add_tag'] = {
 Blockly.JavaScript['gametest_add_tag'] = function (block) {
     var value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     var value_tag = Blockly.JavaScript.valueToCode(block, 'TAG', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = `${value_player}.addTag(${value_tag})`
+    var code = `system.run(() => {
+        ${value_player}.addTag(${value_tag})
+    })
+    `
     return code;
 };
 Blockly.Blocks['gametest_remove_tag'] = {
@@ -681,7 +684,9 @@ Blockly.Blocks['gametest_remove_tag'] = {
 Blockly.JavaScript['gametest_remove_tag'] = function (block) {
     var value_player = Blockly.JavaScript.valueToCode(block, 'PLAYER', Blockly.JavaScript.ORDER_ATOMIC);
     var value_tag = Blockly.JavaScript.valueToCode(block, 'TAG', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = `${value_player}.removeTag(${value_tag})`
+    var code = `system.run(() => {
+    ${value_player}.removeTag(${value_tag})
+    })`
     return code;
 };
 Blockly.Blocks['gametest_has_tag'] = {

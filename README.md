@@ -10,9 +10,9 @@ https://developers.google.com/blockly/guides/overview
 ### 預計要加入的頁面
 
 ✅[實體攻擊事件](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/entityhiteventsignal)\
-[玩家退出事件](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/playerleaveeventsignal)\
-[玩家加入事件](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/playerjoineventsignal)\
-[被添加effect事件](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/effectaddeventsignal)\
+✅[玩家退出事件](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/playerleaveeventsignal)\
+✅[玩家加入事件](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/playerjoineventsignal)\
+✅[被添加effect事件](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/effectaddeventsignal)\
 ✅[Tick Event](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/tickeventsignal)\
 [實體被創建事件](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/entitycreateeventsignal)\
 [爆炸事件](https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/explosioneventsignal)\

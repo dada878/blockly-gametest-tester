@@ -26,6 +26,17 @@ html,body {
     margin: 0;
 }
 
+.button button{
+    width: 150px;
+    border: 2px solid #2e8dcc;
+    cursor: pointer;
+    border-radius: 22px;
+}
+.button buttton[type="submit"]:hover {
+    background-color: #2ecc71;
+    transition: 0.5s;
+  }
+  
 body {
     background-color: #fff;
     font-family: sans-serif;

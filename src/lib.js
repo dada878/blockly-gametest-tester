@@ -2,7 +2,7 @@
 
 function generate() {
   var generate_code = Blockly.JavaScript.workspaceToCode(workspace);
-  var init_code = `import * as GameTest from "@minecraft/server-gametest";\nimport { BlockLocation } from "@minecraft/server";\nconst log = function(message) {let okay_message = message.toString().replaceAll('\\"',"''").replaceAll('\\\\',"/");Minecraft.world.getDimension("overworld")player.runCommand(\`tellraw @a {"rawtext":[{"text":"\${okay_message}"}]}\`)}\n`
+  var init_code = `import { world } from "@minecraft/server";\nexport function log (message) {\n  let okay_message = message.toString().replaceAll('\\"',"''").replaceAll('\\\\',"/");\n world.getDimension("overworld").runCommandAsync(\`tellraw @a {"rawtext":[{"text":"\${okay_message}"}]}\`)}\n`
   return init_code + generate_code
 }
 function check() {
@@ -119,17 +119,17 @@ function download_pack(packName, code) {
         "type": "script",
         "uuid": uuid(),
         "version": [0, 0, 1],
-        "entry": "blockly-gametest/main.js"
+        "entry": "scripts/main.js"
       }
     ],
     "dependencies": [
       {
         "module_name": "@minecraft/server",
-        "version": "1.0.0-beta"
+        "version": "1.12.0-beta"
       },
       {
-        "module_name": "@minecraft/server-gametest",
-        "version": "1.0.0-beta"
+        "module_name": "@minecraft/server-ui",
+        "version": "1.2.0-beta"
       }
     ]
   }
@@ -138,7 +138,7 @@ function download_pack(packName, code) {
   //添加文字檔案
   mcpack.file("manifest.json", JSON.stringify(manifest));
   //添加資料夾
-  let script = mcpack.folder("blockly-gametest");
+  let script = mcpack.folder("scripts");
   script.file("main.js", code);
 
   mcpack.generateAsync({ type: 'blob' }).then(function (content) {

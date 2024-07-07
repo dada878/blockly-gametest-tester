@@ -20,12 +20,19 @@
 </head>
 
 <body>
+<div class="button">
+    <h>minecarft blockly gametset</h>
+    <br>
+    <button onclick="check()" type="submit">轉換程式碼</button>
+    <button onclick="download_pack('addon',generate())" type="submit">生成並下載模組</button>
+    <button onclick="download_js(generate())" type="submit">下載js檔案</button>
+    <button onclick="upload_project()" type="submit">匯入專案</button>
+    <button onclick="download_project()" type="submit">匯出專案</button>
+    <button type = "submit">贊助模式</button>
+    <button type="submit">加入官方DC</button>
 
-  <button onclick="check()">轉換程式碼</button>
-  <button onclick="download_pack('addon',generate())">生成並下載模組</button>
-  <button onclick="download_js(generate())">下載js檔案</button>
-  <button onclick="upload_project()">匯入專案</button>
-  <button onclick="download_project()">匯出專案</button>
+</div>
+
 
   <div id="blocklyArea"></div>
 
